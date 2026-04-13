@@ -1,0 +1,1 @@
+memberSearchIndex = [{"p":"org.quurz.plugins.test.contract","c":"TestContract","l":"echo(String)","u":"echo(java.lang.String)"}];updateSearchResults();

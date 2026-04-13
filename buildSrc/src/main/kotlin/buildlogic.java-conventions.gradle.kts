@@ -37,6 +37,41 @@ java.targetCompatibility = JavaVersion.VERSION_25
 java {
     // Automatisch ein JAR mit den Quellcodedateien erstellen
     withSourcesJar()
+    // Automatisch ein JAR mit der Javadoc erstellen
+    withJavadocJar()
+}
+
+/**
+ * Registriert einen zentralen Task zum Sammeln der Dokumentation für die Astro-Seite.
+ * Dieser Task kopiert Javadocs aus allen Modulen in einen statischen Ordner.
+ */
+tasks.register<Copy>("assembleDocsForStarlight") {
+    group = "documentation"
+    description = "Sammelt Javadocs aller Module für die Astro Starlight Seite."
+
+    // Wir gehen davon aus, dass die Astro-Seite im Ordner 'docs-site' liegt.
+    // Falls der Ordner anders heißt, passen wir das an.
+    val targetDir = project.rootProject.file("docs-site/public/api")
+    
+    // In buildlogic.java-conventions.gradle.kts bezieht sich 'project' auf das Modul,
+    // das dieses Plugin nutzt. Wir müssen also über rootProject auf alle Submodule zugreifen.
+    project.rootProject.subprojects.forEach { sub ->
+        val javadocTask = sub.tasks.findByName("javadoc") as? Javadoc
+        if (javadocTask != null) {
+            dependsOn(javadocTask)
+            from(javadocTask.destinationDir!!) {
+                into(sub.name.lowercase())
+            }
+        }
+    }
+    
+    into(targetDir)
+    
+    doFirst {
+        if (!targetDir.exists()) {
+            targetDir.mkdirs()
+        }
+    }
 }
 
 jacoco {
@@ -138,6 +173,8 @@ tasks.withType<JavaCompile>().configureEach {
 // Basis-Javadoc-Einstellungen
 tasks.withType<Javadoc>().configureEach {
     options.encoding = "UTF-8"
+    // Immer Englisch als Sprache für generierte Javadoc verwenden
+    (options as StandardJavadocDocletOptions).locale = "en_US"
     // Javadoc-Linting (strenge Prüfung) aktuell deaktiviert
     (options as StandardJavadocDocletOptions).addStringOption("Xdoclint:none", "-quiet")
 }
