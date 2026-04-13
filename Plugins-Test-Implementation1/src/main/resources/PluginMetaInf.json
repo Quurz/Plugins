@@ -1,0 +1,6 @@
+{
+  "name": "TestPlugin",
+  "version": "1.0.0",
+  "contract": "org.quurz.foomp.plugins.test.TestPluginContract",
+  "implementation": "org.quurz.foomp.plugins.test.implementation.TestImplementation2"
+}
