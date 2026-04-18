@@ -11,10 +11,11 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Objects;
 
-import static org.quurz.foomp.base.localisation.BaseMessages.nullValue;
-import static org.quurz.foomp.base.util.Util.mustBeConcrete;
-import static org.quurz.foomp.base.util.Util.mustBeInterface;
+import static org.quurz.foomp.base.localisation.BaseMessages.*;
+import static org.quurz.foomp.base.util.Util.requireConcrete;
+import static org.quurz.foomp.base.util.Util.requireInterface;
 import static org.quurz.plugins.TypedValue.extractTypesAndValues;
+import static org.quurz.plugins.localisation.PluginsMessages.unableToCreatePlugin;
 
 @FunctionalInterface
 public interface PluginFactory<A> {
@@ -24,13 +25,13 @@ public interface PluginFactory<A> {
                                                      final @NonNull Class<? extends A> implementation,
                                                      final @NonNull String fullyQualifiedName,
                                                      final @NonNull ClassLoader classLoader) {
-        mustBeInterface(
+        requireInterface(
             Objects.requireNonNull(contract, nullValue("contract")),
-            () -> new IllegalArgumentException("The contract class must be an interface.")    // TODO: Lokalisierung
+            () -> new IllegalArgumentException(notAnInterface(contract))
         );
-        mustBeConcrete(
+        requireConcrete(
             Objects.requireNonNull(implementation, nullValue("implementation")),
-            () -> new IllegalArgumentException("The implementation class must be concrete.")    // TODO: Lokalisierung
+            () -> new IllegalArgumentException(notAConcreteClass(implementation))
         );
         Objects.requireNonNull(fullyQualifiedName, nullValue("fullyQualifiedName"));
         Objects.requireNonNull(classLoader, nullValue("classLoader"));
@@ -65,7 +66,7 @@ public interface PluginFactory<A> {
                          | IllegalAccessException
                          | IllegalArgumentException
                          | InvocationTargetException exception) {
-                throw new IllegalArgumentException(exception);    // TODO
+                throw new IllegalArgumentException(unableToCreatePlugin(), exception);
             }
         };
     }

@@ -23,7 +23,7 @@ import static org.quurz.foomp.base.localisation.BaseMessages.nullValue;
  */
 class PluginMetadataValidator {
 
-    private static final String SCHEMA_FILE = "/PluginMetaInfSchema.json";
+    private static final String SCHEMA_FILE = "/PluginDescriptionSchema.json";
 
     private final Schema schema;
     private final ObjectMapper objectMapper;

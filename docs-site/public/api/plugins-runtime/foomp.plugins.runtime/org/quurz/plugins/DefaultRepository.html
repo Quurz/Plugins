@@ -58,8 +58,8 @@ loadScripts(document, 'script');</script>
 <li><a href="#method-detail" tabindex="0">Methodendetails</a>
 <ol class="toc-list">
 <li><a href="#defaultRepository(java.nio.file.Path)" tabindex="0">defaultRepository(Path)</a></li>
-<li><a href="#push(org.quurz.plugins.PluginId,java.io.InputStream)" tabindex="0">push(PluginId, InputStream)</a></li>
-<li><a href="#delete(org.quurz.plugins.PluginId)" tabindex="0">delete(PluginId)</a></li>
+<li><a href="#push(org.quurz.plugins.PluginDescription,java.io.InputStream)" tabindex="0">push(PluginId, InputStream)</a></li>
+<li><a href="#delete(org.quurz.plugins.PluginDescription)" tabindex="0">delete(PluginId)</a></li>
 </ol>
 </li>
 </ol>
@@ -70,7 +70,7 @@ loadScripts(document, 'script');</script>
 <h1 title="Klasse DefaultRepository" class="title">Klasse DefaultRepository</h1>
 </div>
 <div class="inheritance" title="Vererbungsbaum"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="Klasse oder Schnittstelle in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">org.quurz.plugins.DefaultRepository</div>
+<div class="inheritance">org.quurz.plugins.FileRepository</div>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
@@ -102,10 +102,10 @@ implements <a href="Repository.html" title="Schnittstelle in org.quurz.plugins">
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#defaultRepository(java.nio.file.Path)" class="member-name-link">defaultRepository</a><wbr>(@NonNull <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/file/Path.html" title="Klasse oder Schnittstelle in java.nio.file" class="external-link">Path</a>&nbsp;rootDirectory)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#delete(org.quurz.plugins.PluginId)" class="member-name-link">delete</a><wbr>(@NonNull <a href="PluginId.html" title="Klasse in org.quurz.plugins">PluginId</a>&nbsp;id)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#delete(org.quurz.plugins.PluginDescription)" class="member-name-link">delete</a><wbr>(@NonNull <a href="PluginId.html" title="Klasse in org.quurz.plugins">PluginId</a>&nbsp;id)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@NonNull <a href="PluginHandle.html" title="Klasse in org.quurz.plugins">PluginHandle</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#push(org.quurz.plugins.PluginId,java.io.InputStream)" class="member-name-link">push</a><wbr>(@NonNull <a href="PluginId.html" title="Klasse in org.quurz.plugins">PluginId</a>&nbsp;id,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#push(org.quurz.plugins.PluginDescription,java.io.InputStream)" class="member-name-link">push</a><wbr>(@NonNull <a href="PluginId.html" title="Klasse in org.quurz.plugins">PluginId</a>&nbsp;id,
  @NonNull <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/InputStream.html" title="Klasse oder Schnittstelle in java.io" class="external-link">InputStream</a>&nbsp;inputStream)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 </div>
@@ -134,7 +134,7 @@ implements <a href="Repository.html" title="Schnittstelle in org.quurz.plugins">
 </section>
 </li>
 <li>
-<section class="detail" id="push(org.quurz.plugins.PluginId,java.io.InputStream)">
+<section class="detail" id="push(org.quurz.plugins.PluginDescription,java.io.InputStream)">
 <h3>push</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">@NonNull <a href="PluginHandle.html" title="Klasse in org.quurz.plugins">PluginHandle</a></span>&nbsp;<span class="element-name">push</span><wbr><span class="parameters">(@NonNull <a href="PluginId.html" title="Klasse in org.quurz.plugins">PluginId</a>&nbsp;id,
@@ -142,7 +142,7 @@ implements <a href="Repository.html" title="Schnittstelle in org.quurz.plugins">
                            throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/IOException.html" title="Klasse oder Schnittstelle in java.io" class="external-link">IOException</a></span></div>
 <dl class="notes">
 <dt>Angegeben von:</dt>
-<dd><code><a href="Repository.html#push(org.quurz.plugins.PluginId,java.io.InputStream)">push</a></code>&nbsp;in Schnittstelle&nbsp;<code><a href="Repository.html" title="Schnittstelle in org.quurz.plugins">Repository</a></code></dd>
+<dd><code><a href="Repository.html#push(org.quurz.plugins.PluginDescription,java.io.InputStream)">push</a></code>&nbsp;in Schnittstelle&nbsp;<code><a href="Repository.html" title="Schnittstelle in org.quurz.plugins">Repository</a></code></dd>
 <dt>Löst aus:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/IOException.html" title="Klasse oder Schnittstelle in java.io" class="external-link">IOException</a></code></dd>
 </dl>
@@ -150,14 +150,14 @@ implements <a href="Repository.html" title="Schnittstelle in org.quurz.plugins">
 </section>
 </li>
 <li>
-<section class="detail" id="delete(org.quurz.plugins.PluginId)">
+<section class="detail" id="delete(org.quurz.plugins.PluginDescription)">
 <h3>delete</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">delete</span><wbr><span class="parameters">(@NonNull <a href="PluginId.html" title="Klasse in org.quurz.plugins">PluginId</a>&nbsp;id)</span>
             throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Exception.html" title="Klasse oder Schnittstelle in java.lang" class="external-link">Exception</a></span></div>
 <dl class="notes">
 <dt>Angegeben von:</dt>
-<dd><code><a href="Repository.html#delete(org.quurz.plugins.PluginId)">delete</a></code>&nbsp;in Schnittstelle&nbsp;<code><a href="Repository.html" title="Schnittstelle in org.quurz.plugins">Repository</a></code></dd>
+<dd><code><a href="Repository.html#delete(org.quurz.plugins.PluginDescription)">delete</a></code>&nbsp;in Schnittstelle&nbsp;<code><a href="Repository.html" title="Schnittstelle in org.quurz.plugins">Repository</a></code></dd>
 <dt>Löst aus:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Exception.html" title="Klasse oder Schnittstelle in java.lang" class="external-link">Exception</a></code></dd>
 </dl>

@@ -10,4 +10,8 @@ public class PluginsMessages {
 
     private PluginsMessages() {}
 
+    public static String unableToCreatePlugin() {
+        return RESOURCE_BUNDLE.getString("unableToCreatePlugin");
+    }
+
 }
