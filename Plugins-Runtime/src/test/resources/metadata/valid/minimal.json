@@ -1,0 +1,6 @@
+{
+  "name": "MinimalPlugin",
+  "version": "1.0.0",
+  "contract": "com.example.Contract",
+  "implementation": "com.example.Impl"
+}

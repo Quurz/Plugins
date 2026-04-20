@@ -8,7 +8,9 @@ plugins {
 
 dependencies {
     api("org.quurz.foomp:base:0.1.0-SNAPSHOT")
-    implementation("tools.jackson.core:jackson-databind:3.0.2")
+    implementation(libs.jackson.databind)
+    implementation(libs.jackson.annotations)
+    implementation(libs.jackson.module.parameter.names)
     implementation("com.networknt:json-schema-validator:2.0.0")
     api(libs.net.bytebuddy.byte.buddy)
     api(libs.org.checkerframework.checker.qual)

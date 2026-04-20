@@ -1,0 +1,7 @@
+{
+  "name": "FullPlugin",
+  "version": "2.1.0-beta+build",
+  "contract": "org.quurz.Contract",
+  "implementation": "org.quurz.Impl",
+  "description": "This is a description"
+}

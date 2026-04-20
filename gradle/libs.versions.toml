@@ -15,7 +15,9 @@ org-junit-jupiter-junit-jupiter-engine = "6.0.0"
 org-mockito-mockito-core = "5.20.0"
 org-mockito-mockito-junit-jupiter = "5.20.0"
 org-slf4j-slf4j-api = "2.0.17"
-tools-jackson-core-jackson-databind = "3.0.0"
+jackson = "3.1.2"
+jackson-annotations = "2.21"
+jackson-module-parameter-names = "2.21.2"
 
 [libraries]
 # Hier werden die eigentlichen Bibliotheken (Artifacts) definiert.
@@ -31,4 +33,6 @@ org-junit-jupiter-junit-jupiter-engine = { module = "org.junit.jupiter:junit-jup
 org-mockito-mockito-core = { module = "org.mockito:mockito-core", version.ref = "org-mockito-mockito-core" }
 org-mockito-mockito-junit-jupiter = { module = "org.mockito:mockito-junit-jupiter", version.ref = "org-mockito-mockito-junit-jupiter" }
 org-slf4j-slf4j-api = { module = "org.slf4j:slf4j-api", version.ref = "org-slf4j-slf4j-api" }
-tools-jackson-core-jackson-databind = { module = "tools.jackson.core:jackson-databind", version.ref = "tools-jackson-core-jackson-databind" }
+jackson-databind = { module = "tools.jackson.core:jackson-databind", version.ref = "jackson" }
+jackson-annotations = { module = "com.fasterxml.jackson.core:jackson-annotations", version.ref = "jackson-annotations" }
+jackson-module-parameter-names = { module = "com.fasterxml.jackson.module:jackson-module-parameter-names", version.ref = "jackson-module-parameter-names" }

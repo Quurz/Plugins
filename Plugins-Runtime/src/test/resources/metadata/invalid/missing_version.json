@@ -1,0 +1,5 @@
+{
+  "name": "BadPlugin",
+  "contract": "com.example.Contract",
+  "implementation": "com.example.Impl"
+}

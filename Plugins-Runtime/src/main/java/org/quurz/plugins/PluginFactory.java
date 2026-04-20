@@ -12,24 +12,60 @@ import java.lang.reflect.Method;
 import java.util.Objects;
 
 import static org.quurz.foomp.base.localisation.BaseMessages.*;
-import static org.quurz.foomp.base.util.Util.requireConcrete;
-import static org.quurz.foomp.base.util.Util.requireInterface;
+import static org.quurz.foomp.base.util.Util.*;
 import static org.quurz.plugins.TypedValue.extractTypesAndValues;
 import static org.quurz.plugins.localisation.PluginsMessages.unableToCreatePlugin;
 
+/**
+ * <div>
+ *     <p>
+ *         A factory for creating plugin instances that are wrapped in a thread-safe proxy.
+ *     </p>
+ *     <p>
+ *         The factory uses ByteBuddy to generate a proxy class at runtime that implements the
+ *         specified contract and delegates all calls to an underlying implementation instance.
+ *         Access to the implementation is synchronized using a {@link java.util.concurrent.locks.ReadWriteLock}.
+ *     </p>
+ * </div>
+ *
+ * @param <A> the type of the plugin contract (interface)
+ *
+ * @since 1.0.0
+ *
+ * @author Alexander Schell
+ */
 @FunctionalInterface
 public interface PluginFactory<A> {
 
+    /**
+     * <div>
+     *     <p>
+     *         Creates a new {@code PluginFactory} for the given contract and implementation.
+     *     </p>
+     * </div>
+     *
+     * @param contract           the interface that the plugin must implement; must not be {@code null}
+     * @param implementation     the concrete class providing the implementation; must not be {@code null}
+     * @param fullyQualifiedName the fully qualified name for the generated proxy class; must not be {@code null}
+     * @param classLoader        the {@link ClassLoader} to use for loading the proxy class; must not be {@code null}
+     * @param <A>                the type of the plugin contract
+     * @return a new {@code PluginFactory} instance
+     * @throws IllegalArgumentException if {@code contract} is not an interface, {@code implementation} is not a concrete class,
+     *                                  or if the proxy class cannot be generated
+     * @throws NullPointerException     if any of the parameters is {@code null}
+     *
+     * @since 1.0.0
+     */
     @SuppressWarnings({"unchecked", "resource"})
-    public static <A> PluginFactory<A> pluginFactory(final @NonNull Class<A> contract,
-                                                     final @NonNull Class<? extends A> implementation,
-                                                     final @NonNull String fullyQualifiedName,
-                                                     final @NonNull ClassLoader classLoader) {
-        requireInterface(
+    static <A> PluginFactory<A> pluginFactory(final @NonNull Class<A> contract,
+                                              final @NonNull Class<? extends A> implementation,
+                                              final @NonNull String fullyQualifiedName,
+                                              final @NonNull ClassLoader classLoader) {
+        requireInterfaceType(
             Objects.requireNonNull(contract, nullValue("contract")),
             () -> new IllegalArgumentException(notAnInterface(contract))
         );
-        requireConcrete(
+        requireConcreteType(
             Objects.requireNonNull(implementation, nullValue("implementation")),
             () -> new IllegalArgumentException(notAConcreteClass(implementation))
         );
@@ -71,11 +107,53 @@ public interface PluginFactory<A> {
         };
     }
 
+    /**
+     * <div>
+     *     <p>
+     *         Constructs a new instance of the plugin using the provided arguments.
+     *     </p>
+     * </div>
+     *
+     * @param arguments the arguments to pass to the implementation's constructor; must not be {@code null}
+     * @return a thread-safe proxy instance implementing the contract
+     * @throws IllegalArgumentException if the implementation cannot be instantiated (e.g., matching constructor not found)
+     * @throws NullPointerException     if {@code arguments} is {@code null}
+     *
+     * @since 1.0.0
+     */
     @NonNull
     A construct(final @NonNull TypedValue<?>... arguments);
 
-    // Nested interceptor class for locked delegation
+    /**
+     * <div>
+     *     <p>
+     *         An internal interceptor class used by ByteBuddy for method delegation.
+     *     </p>
+     *     <p>
+     *         This class ensures that all method calls on the proxy are thread-safe by acquiring
+     *         a write lock before delegating the call to the actual implementation.
+     *     </p>
+     * </div>
+     *
+     * @since 1.0.0
+     */
     class LockedDelegator {
+
+        /**
+         * <div>
+         *     <p>
+         *         Intercepts method calls on the proxy and delegates them to the underlying implementation.
+         *     </p>
+         * </div>
+         *
+         * @param plugin the proxy instance
+         * @param method the method being called
+         * @param args   the arguments passed to the method
+         * @return the result of the method invocation
+         * @throws Throwable if the underlying method call throws an exception
+         *
+         * @since 1.0.0
+         */
         @RuntimeType
         public static Object intercept(final @This Proxy<?> plugin,
                                        final @Origin Method method,

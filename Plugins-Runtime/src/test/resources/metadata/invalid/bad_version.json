@@ -1,0 +1,6 @@
+{
+  "name": "BadVerPlugin",
+  "version": "v1.0",
+  "contract": "com.example.Contract",
+  "implementation": "com.example.Impl"
+}
