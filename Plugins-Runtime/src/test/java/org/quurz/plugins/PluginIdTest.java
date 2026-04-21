@@ -16,6 +16,11 @@ class PluginIdTest {
     private static final Logger LOGGER
         = getLogger(PluginIdTest.class);
 
+    private static final String GROUP_1
+        = "org.quurz.plugins";
+    private static final String GROUP_2
+        = "org.other.plugins";
+
     private static final String NAME_1
         = "my-plugin";
     private static final String NAME_2
@@ -27,17 +32,27 @@ class PluginIdTest {
         = semVer(2, 0, 0);
 
     private static final PluginId ID_1_V1
-        = pluginId(NAME_1, VERSION_1);
+        = pluginId(GROUP_1, NAME_1, VERSION_1);
 
     @Nested
     class Factory {
 
         @SuppressWarnings("DataFlowIssue")
         @Test
-        void rejects_null_name() {
-            LOGGER.info("Test PluginId.pluginId(String, SemVer): rejects null name");
+        void rejects_null_group() {
+            LOGGER.info("Test PluginId.pluginId(String, String, SemVer): rejects null group");
 
-            assertThatThrownBy(() -> pluginId(null, VERSION_1))
+            assertThatThrownBy(() -> pluginId(null, NAME_1, VERSION_1))
+                .isInstanceOf(NullPointerException.class)
+                .hasMessageContaining("group");
+        }
+
+        @SuppressWarnings("DataFlowIssue")
+        @Test
+        void rejects_null_name() {
+            LOGGER.info("Test PluginId.pluginId(String, String, SemVer): rejects null name");
+
+            assertThatThrownBy(() -> pluginId(GROUP_1, null, VERSION_1))
                 .isInstanceOf(NullPointerException.class)
                 .hasMessageContaining("name");
         }
@@ -45,25 +60,33 @@ class PluginIdTest {
         @SuppressWarnings("DataFlowIssue")
         @Test
         void rejects_null_version() {
-            LOGGER.info("Test PluginId.pluginId(String, SemVer): rejects null version");
+            LOGGER.info("Test PluginId.pluginId(String, String, SemVer): rejects null version");
 
-            assertThatThrownBy(() -> pluginId(NAME_1, null))
+            assertThatThrownBy(() -> pluginId(GROUP_1, NAME_1, null))
                 .isInstanceOf(NullPointerException.class)
                 .hasMessageContaining("version");
         }
 
         @Test
         void accepts_valid_arguments() {
-            LOGGER.info("Test PluginId.pluginId(String, SemVer): accepts valid arguments");
+            LOGGER.info("Test PluginId.pluginId(String, String, SemVer): accepts valid arguments");
 
             assertThatNoException()
-                .isThrownBy(() -> pluginId(NAME_1, VERSION_1));
+                .isThrownBy(() -> pluginId(GROUP_1, NAME_1, VERSION_1));
         }
 
     }
 
     @Nested
     class Accessors {
+
+        @Test
+        void getGroup_returns_group() {
+            LOGGER.info("Test pluginId.getGroup()");
+
+            assertThat(ID_1_V1.getGroup())
+                .isEqualTo(GROUP_1);
+        }
 
         @Test
         void getName_returns_name() {
@@ -90,7 +113,7 @@ class PluginIdTest {
         void equals_is_reflexive() {
             LOGGER.info("Test pluginId.equals(Object): reflexivity");
             final var a
-                = pluginId(NAME_1, VERSION_1);
+                = pluginId(GROUP_1, NAME_1, VERSION_1);
             assertThat(a)
                 .isEqualTo(a);
         }
@@ -99,9 +122,9 @@ class PluginIdTest {
         void equals_is_symmetric() {
             LOGGER.info("Test pluginId.equals(Object): symmetry");
             final var a
-                = pluginId(NAME_1, VERSION_1);
+                = pluginId(GROUP_1, NAME_1, VERSION_1);
             final var b
-                = pluginId(NAME_1, VERSION_1);
+                = pluginId(GROUP_1, NAME_1, VERSION_1);
             assertThat(a)
                 .isEqualTo(b);
             assertThat(b)
@@ -112,11 +135,11 @@ class PluginIdTest {
         void equals_is_transitive() {
             LOGGER.info("Test pluginId.equals(Object): transitivity");
             final var a
-                = pluginId(NAME_1, VERSION_1);
+                = pluginId(GROUP_1, NAME_1, VERSION_1);
             final var b
-                = pluginId(NAME_1, VERSION_1);
+                = pluginId(GROUP_1, NAME_1, VERSION_1);
             final var c
-                = pluginId(NAME_1, VERSION_1);
+                = pluginId(GROUP_1, NAME_1, VERSION_1);
             assertThat(a)
                 .isEqualTo(b);
             assertThat(b)
@@ -129,9 +152,9 @@ class PluginIdTest {
         void equals_is_consistent() {
             LOGGER.info("Test pluginId.equals(Object): consistency");
             final var a1
-                = pluginId(NAME_1, VERSION_1);
+                = pluginId(GROUP_1, NAME_1, VERSION_1);
             final var a2
-                = pluginId(NAME_1, VERSION_1);
+                = pluginId(GROUP_1, NAME_1, VERSION_1);
             assertThat(a1)
                 .isEqualTo(a2);
             assertThat(a1)
@@ -146,12 +169,23 @@ class PluginIdTest {
         }
 
         @Test
+        void equals_differs_on_different_group() {
+            LOGGER.info("Test pluginId.equals(Object): different group");
+            final var a
+                = pluginId(GROUP_1, NAME_1, VERSION_1);
+            final var b
+                = pluginId(GROUP_2, NAME_1, VERSION_1);
+            assertThat(a)
+                .isNotEqualTo(b);
+        }
+
+        @Test
         void equals_differs_on_different_name() {
             LOGGER.info("Test pluginId.equals(Object): different name");
             final var a
-                = pluginId(NAME_1, VERSION_1);
+                = pluginId(GROUP_1, NAME_1, VERSION_1);
             final var b
-                = pluginId(NAME_2, VERSION_1);
+                = pluginId(GROUP_1, NAME_2, VERSION_1);
             assertThat(a)
                 .isNotEqualTo(b);
         }
@@ -160,9 +194,9 @@ class PluginIdTest {
         void equals_differs_on_different_version() {
             LOGGER.info("Test pluginId.equals(Object): different version");
             final var a
-                = pluginId(NAME_1, VERSION_1);
+                = pluginId(GROUP_1, NAME_1, VERSION_1);
             final var b
-                = pluginId(NAME_1, VERSION_2);
+                = pluginId(GROUP_1, NAME_1, VERSION_2);
             assertThat(a)
                 .isNotEqualTo(b);
         }
@@ -171,9 +205,9 @@ class PluginIdTest {
         void hashCode_equal_objects_have_same_hash() {
             LOGGER.info("Test pluginId.hashCode(): equal objects must have the same hash code");
             final var a1
-                = pluginId(NAME_1, VERSION_1);
+                = pluginId(GROUP_1, NAME_1, VERSION_1);
             final var a2
-                = pluginId(NAME_1, VERSION_1);
+                = pluginId(GROUP_1, NAME_1, VERSION_1);
             assertThat(a1)
                 .isEqualTo(a2);
             assertThat(a1.hashCode())
@@ -196,10 +230,10 @@ class PluginIdTest {
         void format_is_stable() {
             LOGGER.info("Test pluginId.toString()");
 
-            // Expects: PluginId[name=my-plugin, version=1.0.0]
+            // Expects: PluginId[group=org.quurz.plugins, name=my-plugin, version=1.0.0]
             // Note: dependent on the mock setup for SemVer.toString()
             assertThat(ID_1_V1.toString())
-                .isEqualTo("PluginId[name=%s, version=SemVer[major=1, minor=0, patch=0, preRelease=None[], buildMetadata=None[]]]".formatted(NAME_1));
+                .isEqualTo("PluginId[group=%s, name=%s, version=SemVer[major=1, minor=0, patch=0, preRelease=None[], buildMetadata=None[]]]".formatted(GROUP_1, NAME_1));
         }
 
     }

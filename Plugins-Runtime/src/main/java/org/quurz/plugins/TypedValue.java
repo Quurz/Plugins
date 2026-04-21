@@ -116,7 +116,7 @@ public final class TypedValue<A> {
     @SuppressWarnings("rawtypes")
     public static Tuple2<Class<?>[], Object[]> extractTypesAndValues(final @NonNull TypedValue[] arguments) {
         Objects.requireNonNull(arguments, nullValue("arguments"));
-        requireNonNullElements(arguments, _ -> new IllegalArgumentException());    // TODO: Lokalisierung
+        requireNonNullElements(arguments, i -> new IllegalArgumentException("null element in 'arguments' at index " + i));
 
         final var types
             = Arrays.stream(arguments)
@@ -146,7 +146,7 @@ public final class TypedValue<A> {
     @SuppressWarnings("rawtypes")
     public static Tuple2<Class<?>[], Object[]> extractTypesAndValues(final @NonNull List<TypedValue> typedValues) {
         Objects.requireNonNull(typedValues, nullValue("typedValues"));
-        requireNonNullElements(typedValues, _ -> new IllegalArgumentException());    // TODO: Lokalisierung
+        requireNonNullElements(typedValues, i -> new IllegalArgumentException("null element in 'typedValues' at index " + i));
 
         final var types
             = typedValues.stream()
@@ -179,7 +179,7 @@ public final class TypedValue<A> {
         Objects.requireNonNull(typedValuesStream, nullValue("typedValuesStream"));
         final var argumentsList
             = typedValuesStream.sequential().toList();
-        requireNonNullElements(argumentsList, i -> new IllegalArgumentException());    // TODO: Lokalisierung
+        requireNonNullElements(argumentsList, i -> new IllegalArgumentException("null element in 'typedValues' at index " + i));
         return extractTypesAndValues(argumentsList);
     }
 

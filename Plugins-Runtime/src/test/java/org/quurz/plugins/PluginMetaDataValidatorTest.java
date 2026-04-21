@@ -105,6 +105,7 @@ class PluginMetaDataValidatorTest {
             Path file = tempDir.resolve("plugin.json");
             final var json = """
                     {
+                      "group": "org.quurz.plugins",
                       "name": "PathPlugin",
                       "version": "1.0.0",
                       "contract": "com.example.Contract",
@@ -166,6 +167,7 @@ class PluginMetaDataValidatorTest {
             LOGGER.info("Testing invalid class names");
             final var json = """
                     {
+                      "group": "org.quurz.plugins",
                       "name": "BadClassPlugin",
                       "version": "1.0.0",
                       "contract": "Invalid-Class!",
@@ -188,6 +190,7 @@ class PluginMetaDataValidatorTest {
             LOGGER.info("Testing additional properties");
             final var json = """
                     {
+                      "group": "org.quurz.plugins",
                       "name": "ExtraPlugin",
                       "version": "1.0.0",
                       "contract": "com.example.Contract",

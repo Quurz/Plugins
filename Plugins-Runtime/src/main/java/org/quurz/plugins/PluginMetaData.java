@@ -37,8 +37,9 @@ public class PluginMetaData {
      *     </p>
      * </div>
      *
-     * @param name           the name of the plugin; must not be {@code null}
-     * @param version        the semantic version string; must not be {@code null}
+     * @param group           the group of the plugin; must not be {@code null}
+     * @param name            the name of the plugin; must not be {@code null}
+     * @param version         the semantic version string; must not be {@code null}
      * @param contract        the fully qualified name of the contract interface; must not be {@code null}
      * @param implementation  the fully qualified name of the implementation class; must not be {@code null}
      * @param description     an optional description of the plugin
@@ -48,17 +49,19 @@ public class PluginMetaData {
      * @since 1.0.0
      */
     @JsonCreator
-    public static PluginMetaData pluginMetaData(final @JsonProperty("name") @NonNull String name,
+    public static PluginMetaData pluginMetaData(final @JsonProperty("group") @NonNull String group,
+                                                final @JsonProperty("name") @NonNull String name,
                                                 final @JsonProperty("version") @NonNull String version,
                                                 final @JsonProperty("contract") @NonNull String contract,
                                                 final @JsonProperty("implementation") @NonNull String implementation,
                                                 final @JsonProperty("description") String description) {
+        Objects.requireNonNull(group, nullValue("group"));
         Objects.requireNonNull(name, nullValue("name"));
         Objects.requireNonNull(version, nullValue("version"));
         Objects.requireNonNull(contract, nullValue("contract"));
         Objects.requireNonNull(implementation, nullValue("implementation"));
 
-        return new PluginMetaData(pluginId(name, parseSemVer(version)), contract, implementation, description == null ? "" : description);
+        return new PluginMetaData(pluginId(group, name, parseSemVer(version)), contract, implementation, description == null ? "" : description);
     }
 
     private final PluginId id;

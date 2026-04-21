@@ -13,7 +13,7 @@ import static org.quurz.foomp.base.localisation.BaseMessages.nullValue;
 /**
  * <div>
  *     <p>
- *         Identifier for a plugin, uniquely defined by its name and version.
+ *         Identifier for a plugin, uniquely defined by its group, name and version.
  *     </p>
  *     <p>
  *         This class is immutable and serves as a key to distinguish different plugins
@@ -38,28 +38,49 @@ public class PluginId
      *     </p>
      * </div>
      *
+     * @param group   the non-null group of the plugin
      * @param name    the non-null name of the plugin
      * @param version the non-null semantic version of the plugin
      * @return a new {@link PluginId} instance
-     * @throws NullPointerException if {@code name} or {@code version} is {@code null}
+     * @throws NullPointerException if {@code group}, {@code name} or {@code version} is {@code null}
      * @since 1.0.0
      */
-    public static PluginId pluginId(final @NonNull String name,
+    public static PluginId pluginId(final @NonNull String group,
+                                    final @NonNull String name,
                                     final @NonNull SemVer version) {
         Objects.requireNonNull(name, nullValue("name"));
         Objects.requireNonNull(version, nullValue("version"));
-        return new PluginId(name, version);
+        Objects.requireNonNull(group, nullValue("group"));
+        return new PluginId(group, name, version);
     }
 
+    private final String group;
     private final String name;
     private final SemVer version;
 
-    private PluginId(final String name,
+    private PluginId(final String group,
+                     final String name,
                      final SemVer version) {
+        this.group
+            = group;
         this.name
             = name;
         this.version
             = version;
+    }
+
+    /**
+     * <div>
+     *     <p>
+     *         Returns the group of the plugin.
+     *     </p>
+     * </div>
+     *
+     * @return the non-null plugin group
+     * @since 1.0.0
+     */
+    public String getGroup() {
+        return this.group;
     }
 
     /**
@@ -94,7 +115,7 @@ public class PluginId
      * <div>
      *     <p>
      *         Compares this PluginId to another object for equality.
-     *         Two PluginId instances are equal if both their name and version are equal.
+     *         Two PluginId instances are equal if their group, name and version are equal.
      *     </p>
      * </div>
      *
@@ -106,13 +127,13 @@ public class PluginId
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof PluginId that)) return false;
-        return name.equals(that.name) && version.equals(that.version);
+        return Objects.equals(group, that.group) && Objects.equals(name, that.name) && Objects.equals(version, that.version);
     }
 
     /**
      * <div>
      *     <p>
-     *         Returns a hash code for this PluginId based on its name and version.
+     *         Returns a hash code for this PluginId based on its group, name and version.
      *     </p>
      * </div>
      *
@@ -121,15 +142,13 @@ public class PluginId
      */
     @Override
     public int hashCode() {
-        int result = Objects.hashCode(name);
-        result = 31 * result + Objects.hashCode(version);
-        return result;
+        return Objects.hash(group, name, version);
     }
 
     /**
      * <div>
      *     <p>
-     *         Returns a string representation in the form {@code PluginId[name=..., version=...]}.
+     *         Returns a string representation in the form {@code PluginId[group=..., name=..., version=...]}.
      *     </p>
      * </div>
      *
@@ -139,6 +158,7 @@ public class PluginId
     @Override
     public String toString() {
         return new StringJoiner(", ", PluginId.class.getSimpleName() + "[", "]")
+                .add("group=" + group)
                 .add("name=" + name)
                 .add("version=" + version)
                 .toString();

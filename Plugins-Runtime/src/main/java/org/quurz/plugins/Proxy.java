@@ -43,6 +43,17 @@ public class Proxy<A> {
     /**
      * <div>
      *     <p>
+     *         The prepared plugin implementation instance, waiting for activation.
+     *     </p>
+     * </div>
+     *
+     * @since 1.0.0
+     */
+    private A $__prepared;
+
+    /**
+     * <div>
+     *     <p>
      *         The lock used to synchronize access to the implementation.
      *     </p>
      * </div>
@@ -126,6 +137,60 @@ public class Proxy<A> {
             this.$__implementation
                 = implementation;
             return oldPlugin;
+        } finally {
+            $__access_lock.writeLock().unlock();
+        }
+    }
+
+    /**
+     * <div>
+     *     <p>
+     *         Prepares a new plugin implementation for later activation.
+     *     </p>
+     *     <p>
+     *         This method acquires a write lock before setting the prepared implementation.
+     *     </p>
+     * </div>
+     *
+     * @param newImplementation the new implementation instance to prepare; must not be {@code null}
+     * @throws NullPointerException if {@code newImplementation} is {@code null}
+     *
+     * @since 1.0.0
+     */
+    void $__prepare(final @NonNull A newImplementation) {
+        Objects.requireNonNull(newImplementation, nullValue("newImplementation"));
+        $__access_lock.writeLock().lock();
+        try {
+            this.$__prepared
+                = newImplementation;
+        } finally {
+            $__access_lock.writeLock().unlock();
+        }
+    }
+
+    /**
+     * <div>
+     *     <p>
+     *         Activates the previously prepared plugin implementation.
+     *     </p>
+     *     <p>
+     *         This method acquires a write lock. If a new implementation has been prepared
+     *         via {@link #$__prepare(Object)}, it becomes the active implementation and
+     *         the preparation state is cleared.
+     *     </p>
+     * </div>
+     *
+     * @since 1.0.0
+     */
+    void $__activate() {
+        $__access_lock.writeLock().lock();
+        try {
+            if (this.$__prepared != null) {
+                this.$__implementation
+                    = this.$__prepared;
+                this.$__prepared
+                    = null;
+            }
         } finally {
             $__access_lock.writeLock().unlock();
         }
