@@ -45,6 +45,10 @@ public class PluginsMessages {
         return RESOURCE_BUNDLE.getString("UNABLE_TO_REMOVE_PLUGIN").formatted(pluginId.toString());
     }
 
+    public static String unableToCreateClassLoader() {
+        return RESOURCE_BUNDLE.getString("UNABLE_TO_CREATE_CLASS_LOADER");
+    }
+
     public static String unableToCreatePlugin() {
         return RESOURCE_BUNDLE.getString("UNABLE_TO_CREATE_PLUGIN");
     }
