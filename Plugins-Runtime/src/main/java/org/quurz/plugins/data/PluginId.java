@@ -2,6 +2,7 @@ package org.quurz.plugins.data;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.quurz.foomp.base.misc.SemVer;
+import org.quurz.foomp.base.types.Eq;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -25,7 +26,8 @@ import static org.quurz.foomp.base.localisation.BaseMessages.nullValue;
  * @author Alexander Schell
  */
 public class PluginId
-        implements Serializable {
+        implements Serializable,
+                   Eq<PluginId> {
 
     @Serial
     private static final long serialVersionUID
@@ -109,6 +111,30 @@ public class PluginId
      */
     public SemVer getVersion() {
         return this.version;
+    }
+
+    /**
+     * <div>
+     *     <p>
+     *         Checks if this plugin identifier is equivalent to another one, considering only
+     *         the group and the name.
+     *     </p>
+     *     <p>
+     *         This method is useful when you want to check if two identifiers represent
+     *         the same plugin, regardless of its specific version.
+     *     </p>
+     * </div>
+     *
+     * @param other the other plugin identifier to compare with; must not be {@code null}
+     * @return {@code true} if both identifiers have the same group and name; {@code false} otherwise
+     * @throws NullPointerException if {@code other} is {@code null}
+     *
+     * @since 1.0.0
+     */
+    @Override
+    public boolean eq(final @NonNull PluginId other) {
+        Objects.requireNonNull(other, nullValue("other"));
+        return this.group.equals(other.group) && this.name.equals(other.name);
     }
 
     /**

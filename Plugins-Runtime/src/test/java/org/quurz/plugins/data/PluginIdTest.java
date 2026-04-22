@@ -224,6 +224,46 @@ class PluginIdTest {
     }
 
     @Nested
+    class Eq_Contract {
+
+        @Test
+        void eq_returns_true_for_same_group_and_name_even_if_version_differs() {
+            LOGGER.info("Test pluginId.eq(PluginId): same group and name, different version");
+            final var a = pluginId(GROUP_1, NAME_1, VERSION_1);
+            final var b = pluginId(GROUP_1, NAME_1, VERSION_2);
+            
+            assertThat(a.eq(b)).isTrue();
+        }
+
+        @Test
+        void eq_returns_false_for_different_group() {
+            LOGGER.info("Test pluginId.eq(PluginId): different group");
+            final var a = pluginId(GROUP_1, NAME_1, VERSION_1);
+            final var b = pluginId(GROUP_2, NAME_1, VERSION_1);
+            
+            assertThat(a.eq(b)).isFalse();
+        }
+
+        @Test
+        void eq_returns_false_for_different_name() {
+            LOGGER.info("Test pluginId.eq(PluginId): different name");
+            final var a = pluginId(GROUP_1, NAME_1, VERSION_1);
+            final var b = pluginId(GROUP_1, NAME_2, VERSION_1);
+            
+            assertThat(a.eq(b)).isFalse();
+        }
+
+        @Test
+        void eq_rejects_null() {
+            LOGGER.info("Test pluginId.eq(PluginId): null handling");
+            assertThatThrownBy(() -> ID_1_V1.eq(null))
+                .isInstanceOf(NullPointerException.class)
+                .hasMessageContaining("other");
+        }
+
+    }
+
+    @Nested
     class ToString_Contract {
 
         @Test

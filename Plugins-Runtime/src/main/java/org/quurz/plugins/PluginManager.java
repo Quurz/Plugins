@@ -3,14 +3,24 @@ package org.quurz.plugins;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.quurz.foomp.base.misc.LogAdapter;
 import org.quurz.plugins.data.PluginId;
+import org.quurz.plugins.data.PluginMetaData;
+import org.quurz.plugins.data.PluginMetaDataValidator;
 import org.quurz.plugins.events.PluginChangeEvent;
 import org.quurz.plugins.events.PluginChangeEventListener;
+import org.quurz.plugins.internal.PluginFactory;
+import org.quurz.plugins.internal.PluginHandle;
+import org.quurz.plugins.internal.StreamClassLoader;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Supplier;
+import java.util.jar.JarEntry;
+import java.util.jar.JarInputStream;
 
 import static org.quurz.foomp.base.localisation.BaseMessages.nullValue;
 import static org.quurz.plugins.localisation.PluginsMessages.pluginManagerAlreadyInitialised;
@@ -100,7 +110,8 @@ public final class PluginManager {
 
     private final LogAdapter logAdapter;
     private final PluginRepository repository;
-    private final Map<PluginId, Set<PluginChangeEventListener>> idsToListeners;
+    private final Map<PluginIdentifier, Set<PluginChangeEventListener>> idsToListeners;
+    private final Map<PluginId, PluginHandle<?>> idsToHandles;
 
     private PluginManager(final LogAdapter logAdapter,
                           final PluginRepository repository) {
@@ -110,6 +121,8 @@ public final class PluginManager {
             = repository;
         this.idsToListeners
             = new ConcurrentHashMap<>();
+        this.idsToHandles
+            = new ConcurrentHashMap<>();
     }
 
     /**
@@ -118,8 +131,8 @@ public final class PluginManager {
      *         Returns a {@link PluginConstructor} for the specified plugin.
      *     </p>
      *     <p>
-     *         The constructor can be used to create one or more instances of the plugin
-     *         that implement the contract {@code A}.
+     *         The constructor is cached and can be used to create one or more instances
+     *         of the plugin that implement the contract {@code A}.
      *     </p>
      * </div>
      *
@@ -127,14 +140,54 @@ public final class PluginManager {
      * @param <A>      the type of the plugin contract
      * @return a {@link PluginConstructor} instance
      * @throws NullPointerException if {@code pluginId} is {@code null}
+     * @throws RuntimeException     if the plugin cannot be loaded or initialized
      *
      * @since 1.0.0
      */
+    @SuppressWarnings("unchecked")
     public <A> PluginConstructor<A> constructor(final @NonNull PluginId pluginId) {
         Objects.requireNonNull(pluginId, nullValue("pluginId"));
-        return null;    // TODO
+
+        return (PluginConstructor<A>) this.idsToHandles.computeIfAbsent(pluginId, id -> {
+            try {
+                final var jarSupplier = repository.retrieve(id);
+                final var metaData = discoverMetaData(jarSupplier);
+                final var loader = new StreamClassLoader(jarSupplier.get(), PluginManager.class.getClassLoader());
+
+                final Class<A> contract = (Class<A>) loader.loadClass(metaData.getContract());
+                final Class<? extends A> implementation = (Class<? extends A>) loader.loadClass(metaData.getImplementation());
+
+                final String proxyName = "org.quurz.plugins.internal.Proxy_" + id.getGroup().replace('.', '_') + "_" + id.getName() + "_" + id.getVersion().toString().replace('.', '_');
+                final var factory = PluginFactory.pluginFactory(contract, implementation, proxyName, loader);
+
+                return PluginHandle.pluginHandle(metaData, loader, factory);
+            } catch (final Exception exception) {
+                throw new RuntimeException(exception);
+            }
+        }).getFactory();
     }
 
+    /**
+     * <div>
+     *     <p>
+     *         Returns a {@link PluginConstructor} for the specified plugin and registers
+     *         a listener for change events of that plugin.
+     *     </p>
+     *     <p>
+     *         The listener is registered before the constructor is returned, ensuring
+     *         it receives all subsequent lifecycle events for the plugin.
+     *     </p>
+     * </div>
+     *
+     * @param pluginId the unique identifier of the plugin; must not be {@code null}
+     * @param listener the listener to register; must not be {@code null}
+     * @param <A>      the type of the plugin contract
+     * @return a {@link PluginConstructor} instance
+     * @throws NullPointerException if {@code pluginId} or {@code listener} is {@code null}
+     * @throws RuntimeException     if the plugin cannot be loaded or initialized
+     *
+     * @since 1.0.0
+     */
     public <A> PluginConstructor<A> constructor(final @NonNull PluginId pluginId,
                                                 final @NonNull PluginChangeEventListener listener) {
         Objects.requireNonNull(pluginId, nullValue("pluginId"));
@@ -163,7 +216,7 @@ public final class PluginManager {
         Objects.requireNonNull(pluginId, nullValue("pluginId"));
         Objects.requireNonNull(listener, nullValue("listener"));
 
-        this.idsToListeners.computeIfAbsent(pluginId, key -> ConcurrentHashMap.newKeySet()).add(listener);
+        this.idsToListeners.computeIfAbsent(PluginIdentifier.pluginIdentifier(pluginId), key -> ConcurrentHashMap.newKeySet()).add(listener);
     }
 
     /**
@@ -184,12 +237,12 @@ public final class PluginManager {
         Objects.requireNonNull(pluginId, nullValue("pluginId"));
         Objects.requireNonNull(listener, nullValue("listener"));
 
-        Optional.ofNullable(this.idsToListeners.get(pluginId))
+        Optional.ofNullable(this.idsToListeners.get(PluginIdentifier.pluginIdentifier(pluginId)))
                 .ifPresent(set -> set.remove(listener));
     }
 
     private void firePluginChangeAnnouncementEvent(final PluginId pluginId) {
-        Optional.ofNullable(this.idsToListeners.get(pluginId))
+        Optional.ofNullable(this.idsToListeners.get(PluginIdentifier.pluginIdentifier(pluginId)))
                 .ifPresent(set -> {
                     final var event = PluginChangeEvent.pluginChangeAnnouncementEvent(pluginId);
                     set.forEach(listener -> listener.onPluginChangeAnnouncementEvent(event));
@@ -197,7 +250,7 @@ public final class PluginManager {
     }
 
     private void firePluginInstallEvent(final PluginId pluginId) {
-        Optional.ofNullable(this.idsToListeners.get(pluginId))
+        Optional.ofNullable(this.idsToListeners.get(PluginIdentifier.pluginIdentifier(pluginId)))
                 .ifPresent(set -> {
                     final var event = PluginChangeEvent.pluginInstallEvent(pluginId);
                     set.forEach(listener -> listener.onPluginInstallEvent(event));
@@ -205,7 +258,7 @@ public final class PluginManager {
     }
 
     private void firePluginUpdateEvent(final PluginId pluginId) {
-        Optional.ofNullable(this.idsToListeners.get(pluginId))
+        Optional.ofNullable(this.idsToListeners.get(PluginIdentifier.pluginIdentifier(pluginId)))
                 .ifPresent(set -> {
                     final var event = PluginChangeEvent.pluginUpdateEvent(pluginId);
                     set.forEach(listener -> listener.onPluginUpdateEvent(event));
@@ -213,11 +266,41 @@ public final class PluginManager {
     }
 
     private void firePluginUninstallEvent(final PluginId pluginId) {
-        Optional.ofNullable(this.idsToListeners.get(pluginId))
+        Optional.ofNullable(this.idsToListeners.get(PluginIdentifier.pluginIdentifier(pluginId)))
                 .ifPresent(set -> {
                     final var event = PluginChangeEvent.pluginUninstallEvent(pluginId);
                     set.forEach(listener -> listener.onPluginUninstallEvent(event));
                 });
+    }
+
+    private record PluginIdentifier(String group,
+                                    String name) {
+        static PluginIdentifier pluginIdentifier(final @NonNull PluginId pluginId) {
+            return new PluginIdentifier(pluginId.getGroup(), pluginId.getName());
+        }
+    }
+
+    private PluginMetaData discoverMetaData(final Supplier<InputStream> jarSupplier) throws IOException {
+        try (final var is = jarSupplier.get();
+             final var jis = new JarInputStream(is)) {
+            JarEntry entry;
+            while ((entry = jis.getNextJarEntry()) != null) {
+                if ("plugin.json".equals(entry.getName())) {
+                    final var result = PluginMetaDataValidator.loadAndValidatePluginMetadata(jis);
+                    if (result.isSuccess()) {
+                        final var either = result.get();
+                        if (either.isRight()) {
+                            return either.get();
+                        } else {
+                            throw new IOException("Validation failed: " + either.getLeft());
+                        }
+                    } else {
+                        throw new IOException("Failed to read metadata", result.getException());
+                    }
+                }
+            }
+        }
+        throw new IOException("Metadata not found in JAR");
     }
 
 }

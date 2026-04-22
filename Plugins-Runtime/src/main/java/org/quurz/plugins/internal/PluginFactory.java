@@ -37,7 +37,8 @@ import static org.quurz.plugins.localisation.PluginsMessages.unableToCreatePlugi
  * @author Alexander Schell
  */
 @FunctionalInterface
-public interface PluginFactory<A> extends PluginConstructor<A> {
+public interface PluginFactory<A>
+        extends PluginConstructor<A> {
 
     /**
      * <div>
