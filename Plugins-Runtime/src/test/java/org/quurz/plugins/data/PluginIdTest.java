@@ -1,4 +1,4 @@
-package org.quurz.plugins;
+package org.quurz.plugins.data;
 
 import org.junit.jupiter.api.*;
 import org.quurz.foomp.base.misc.SemVer;
@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 
 import static org.assertj.core.api.AssertionsForClassTypes.*;
 import static org.quurz.foomp.base.misc.SemVer.semVer;
-import static org.quurz.plugins.PluginId.pluginId;
+import static org.quurz.plugins.data.PluginId.pluginId;
 import static org.slf4j.LoggerFactory.getLogger;
 
 @DisplayName("PluginId")

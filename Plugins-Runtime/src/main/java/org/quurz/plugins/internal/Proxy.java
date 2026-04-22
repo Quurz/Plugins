@@ -1,4 +1,4 @@
-package org.quurz.plugins;
+package org.quurz.plugins.internal;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 

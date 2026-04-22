@@ -1,4 +1,6 @@
-package org.quurz.plugins;
+package org.quurz.plugins.events;
+
+import org.quurz.plugins.data.PluginId;
 
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;

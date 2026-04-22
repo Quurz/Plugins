@@ -1,4 +1,4 @@
-package org.quurz.plugins;
+package org.quurz.plugins.data;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.quurz.foomp.base.misc.SemVer;

@@ -1,4 +1,4 @@
-package org.quurz.plugins;
+package org.quurz.plugins.internal;
 
 import  net.bytebuddy.ByteBuddy;
 import net.bytebuddy.implementation.bind.annotation.AllArguments;
@@ -6,6 +6,8 @@ import net.bytebuddy.implementation.bind.annotation.Origin;
 import net.bytebuddy.implementation.bind.annotation.RuntimeType;
 import net.bytebuddy.implementation.bind.annotation.This;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.quurz.plugins.PluginConstructor;
+import org.quurz.plugins.TypedValue;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -35,7 +37,7 @@ import static org.quurz.plugins.localisation.PluginsMessages.unableToCreatePlugi
  * @author Alexander Schell
  */
 @FunctionalInterface
-public interface PluginFactory<A> {
+public interface PluginFactory<A> extends PluginConstructor<A> {
 
     /**
      * <div>
@@ -88,7 +90,7 @@ public interface PluginFactory<A> {
         return arguments -> {
             try {
                 final var typesAndValues
-                    = extractTypesAndValues(arguments);
+                    = TypedValue.extractTypesAndValues(arguments);
                 final var pluginConstructor
                     = implementation.getDeclaredConstructor(typesAndValues.get1());
                 final var plugin

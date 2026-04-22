@@ -1,11 +1,11 @@
-package org.quurz.plugins;
+package org.quurz.plugins.internal;
 
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 
 import java.util.function.Supplier;
 
-import static org.quurz.plugins.PluginFactory.pluginFactory;
+import static org.quurz.plugins.internal.PluginFactory.pluginFactory;
 import static org.slf4j.LoggerFactory.getLogger;
 
 class ByteBuddySmokeTest {

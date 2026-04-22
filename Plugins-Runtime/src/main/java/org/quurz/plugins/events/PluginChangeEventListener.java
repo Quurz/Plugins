@@ -1,8 +1,6 @@
-package org.quurz.plugins;
+package org.quurz.plugins.events;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
-
-import java.util.Objects;
 
 /**
  * <div>
@@ -28,20 +26,6 @@ public interface PluginChangeEventListener {
     /**
      * <div>
      *     <p>
-     *         Invoked when a plugin change event occurs.
-     *     </p>
-     * </div>
-     *
-     * @param event the plugin change event; must not be {@code null}
-     * @throws NullPointerException if {@code event} is {@code null}
-     *
-     * @since 1.0.0
-     */
-    void onEvent(final @NonNull PluginChangeEvent event);
-
-    /**
-     * <div>
-     *     <p>
      *         Invoked when a plugin change announcement event occurs.
      *     </p>
      * </div>
@@ -50,7 +34,7 @@ public interface PluginChangeEventListener {
      *
      * @since 1.0.0
      */
-    void onAnnouncement(final PluginChangeEvent.@NonNull PluginChangeAnnouncementEvent event);
+    void onPluginChangeAnnouncementEvent(final PluginChangeEvent.@NonNull PluginChangeAnnouncementEvent event);
 
     /**
      * <div>
@@ -63,7 +47,7 @@ public interface PluginChangeEventListener {
      *
      * @since 1.0.0
      */
-    void onInstall(final PluginChangeEvent.@NonNull PluginInstallEvent event);
+    void onPluginInstallEvent(final PluginChangeEvent.@NonNull PluginInstallEvent event);
 
     /**
      * <div>
@@ -76,7 +60,7 @@ public interface PluginChangeEventListener {
      *
      * @since 1.0.0
      */
-    void onUpdate(final PluginChangeEvent.@NonNull PluginUpdateEvent event);
+    void onPluginUpdateEvent(final PluginChangeEvent.@NonNull PluginUpdateEvent event);
 
     /**
      * <div>
@@ -89,6 +73,6 @@ public interface PluginChangeEventListener {
      *
      * @since 1.0.0
      */
-    void onUninstall(final PluginChangeEvent.@NonNull PluginUninstallEvent event);
+    void onPluginUninstallEvent(final PluginChangeEvent.@NonNull PluginUninstallEvent event);
 
 }

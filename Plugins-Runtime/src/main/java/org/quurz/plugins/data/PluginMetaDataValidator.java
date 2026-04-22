@@ -1,4 +1,4 @@
-package org.quurz.plugins;
+package org.quurz.plugins.data;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.networknt.schema.Error;
@@ -29,7 +29,7 @@ import static org.quurz.foomp.base.util.Util.requireRegularFile;
  *         Validates plugin metadata JSON strings against the defined JSON schema.
  *     </p>
  *     <p>
- *         The class is package-private and provides static methods to load and
+ *         The class provides static methods to load and
  *         validate metadata from various sources.
  *     </p>
  * </div>
@@ -41,7 +41,7 @@ import static org.quurz.foomp.base.util.Util.requireRegularFile;
 public class PluginMetaDataValidator {
 
     private static final String SCHEMA_FILE
-        = "/PluginMetaDataSchema.json";
+        = "PluginMetaDataSchema.json";
     private static final Schema SCHEMA
         = SchemaRegistry.withDefaultDialect(SpecificationVersion.DRAFT_7)
             .getSchema(PluginMetaDataValidator.class.getResourceAsStream(SCHEMA_FILE));

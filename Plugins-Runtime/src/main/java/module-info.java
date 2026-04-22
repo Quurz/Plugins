@@ -1,5 +1,8 @@
 module foomp.plugins.runtime {
     exports org.quurz.plugins;
+    exports org.quurz.plugins.events;
+    exports org.quurz.plugins.data;
+    exports org.quurz.plugins.localisation;
 
     requires foomp.base;
     requires net.bytebuddy;

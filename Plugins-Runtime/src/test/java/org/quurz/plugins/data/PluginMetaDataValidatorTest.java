@@ -1,4 +1,4 @@
-package org.quurz.plugins;
+package org.quurz.plugins.data;
 
 import com.networknt.schema.Error;
 import org.junit.jupiter.api.DisplayName;

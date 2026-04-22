@@ -1,14 +1,15 @@
-package org.quurz.plugins;
+package org.quurz.plugins.data;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.Objects;
+import java.util.StringJoiner;
 
 import static org.quurz.foomp.base.localisation.BaseMessages.nullValue;
 import static org.quurz.foomp.base.misc.SemVer.parseSemVer;
-import static org.quurz.plugins.PluginId.pluginId;
+import static org.quurz.plugins.data.PluginId.pluginId;
 
 /**
  * <div>
@@ -156,12 +157,12 @@ public class PluginMetaData {
 
     @Override
     public String toString() {
-        return "PluginMetaData{" +
-                "id=" + id +
-                ", contract='" + contract + '\'' +
-                ", implementation='" + implementation + '\'' +
-                ", description='" + description + '\'' +
-                '}';
+        return new StringJoiner(", ", PluginMetaData.class.getSimpleName() + "[", "]")
+                .add("id=" + id)
+                .add("contract=" + contract)
+                .add("implementation=" + implementation)
+                .add("description=" + description)
+                .toString();
     }
 
 }
