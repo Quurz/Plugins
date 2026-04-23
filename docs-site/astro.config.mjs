@@ -6,19 +6,29 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
 	integrations: [
 		starlight({
-			title: 'My Docs',
-			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro/starlight' }],
+			title: 'Plugins Runtime',
+			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/Quurz/Plugins' }],
 			sidebar: [
 				{
-					label: 'Guides',
+					label: 'Getting Started',
 					items: [
-						// Each item here is one entry in the navigation menu.
-						{ label: 'Example Guide', slug: 'guides/example' },
+						{ label: 'Introduction', slug: 'guides/introduction' },
+						{ label: 'Installation', slug: 'guides/installation' },
+					],
+				},
+				{
+					label: 'Usage',
+					items: [
+						{ label: 'Basic Usage', slug: 'guides/usage' },
+						{ label: 'Creating a Plugin', slug: 'guides/creating-a-plugin' },
 					],
 				},
 				{
 					label: 'Reference',
-					autogenerate: { directory: 'reference' },
+					items: [
+						{ label: 'Plugin Metadata', slug: 'reference/plugin-metadata' },
+						{ label: 'API Reference', slug: 'reference/api' },
+					],
 				},
 			],
 		}),

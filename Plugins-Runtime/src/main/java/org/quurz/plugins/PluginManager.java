@@ -113,6 +113,18 @@ public final class PluginManager {
     private final Map<PluginIdentifier, Set<PluginChangeEventListener>> idsToListeners;
     private final Map<PluginId, PluginHandle<?>> idsToHandles;
 
+    /**
+     * <div>
+     *     <p>
+     *         Private constructor for the {@code PluginManager}.
+     *     </p>
+     * </div>
+     *
+     * @param logAdapter the adapter to use for logging; must not be {@code null}
+     * @param repository the repository to use for storing and retrieving plugins; must not be {@code null}
+     *
+     * @since 1.0.0
+     */
     private PluginManager(final LogAdapter logAdapter,
                           final PluginRepository repository) {
         this.logAdapter
@@ -150,12 +162,17 @@ public final class PluginManager {
 
         return (PluginConstructor<A>) this.idsToHandles.computeIfAbsent(pluginId, id -> {
             try {
-                final var jarSupplier = repository.retrieve(id);
-                final var metaData = discoverMetaData(jarSupplier);
-                final var loader = new StreamClassLoader(jarSupplier.get(), PluginManager.class.getClassLoader());
+                final var jarSupplier
+                    = repository.retrieve(id);
+                final var metaData
+                    = discoverMetaData(jarSupplier);
+                final var loader
+                    = new StreamClassLoader(jarSupplier.get(), PluginManager.class.getClassLoader());
 
-                final Class<A> contract = (Class<A>) loader.loadClass(metaData.getContract());
-                final Class<? extends A> implementation = (Class<? extends A>) loader.loadClass(metaData.getImplementation());
+                final Class<A> contract
+                    = (Class<A>) loader.loadClass(metaData.getContract());
+                final Class<? extends A> implementation
+                    = (Class<? extends A>) loader.loadClass(metaData.getImplementation());
 
                 final String proxyName = "org.quurz.plugins.internal.Proxy_" + id.getGroup().replace('.', '_') + "_" + id.getName() + "_" + id.getVersion().toString().replace('.', '_');
                 final var factory = PluginFactory.pluginFactory(contract, implementation, proxyName, loader);
@@ -241,6 +258,17 @@ public final class PluginManager {
                 .ifPresent(set -> set.remove(listener));
     }
 
+    /**
+     * <div>
+     *     <p>
+     *         Fires a change announcement event for the specified plugin.
+     *     </p>
+     * </div>
+     *
+     * @param pluginId the identifier of the plugin
+     *
+     * @since 1.0.0
+     */
     private void firePluginChangeAnnouncementEvent(final PluginId pluginId) {
         Optional.ofNullable(this.idsToListeners.get(PluginIdentifier.pluginIdentifier(pluginId)))
                 .ifPresent(set -> {
@@ -249,6 +277,17 @@ public final class PluginManager {
                 });
     }
 
+    /**
+     * <div>
+     *     <p>
+     *         Fires an installation event for the specified plugin.
+     *     </p>
+     * </div>
+     *
+     * @param pluginId the identifier of the plugin
+     *
+     * @since 1.0.0
+     */
     private void firePluginInstallEvent(final PluginId pluginId) {
         Optional.ofNullable(this.idsToListeners.get(PluginIdentifier.pluginIdentifier(pluginId)))
                 .ifPresent(set -> {
@@ -257,6 +296,17 @@ public final class PluginManager {
                 });
     }
 
+    /**
+     * <div>
+     *     <p>
+     *         Fires an update event for the specified plugin.
+     *     </p>
+     * </div>
+     *
+     * @param pluginId the identifier of the plugin
+     *
+     * @since 1.0.0
+     */
     private void firePluginUpdateEvent(final PluginId pluginId) {
         Optional.ofNullable(this.idsToListeners.get(PluginIdentifier.pluginIdentifier(pluginId)))
                 .ifPresent(set -> {
@@ -265,6 +315,17 @@ public final class PluginManager {
                 });
     }
 
+    /**
+     * <div>
+     *     <p>
+     *         Fires an uninstallation event for the specified plugin.
+     *     </p>
+     * </div>
+     *
+     * @param pluginId the identifier of the plugin
+     *
+     * @since 1.0.0
+     */
     private void firePluginUninstallEvent(final PluginId pluginId) {
         Optional.ofNullable(this.idsToListeners.get(PluginIdentifier.pluginIdentifier(pluginId)))
                 .ifPresent(set -> {
@@ -273,13 +334,55 @@ public final class PluginManager {
                 });
     }
 
+    /**
+     * <div>
+     *     <p>
+     *         Internal record to uniquely identify a plugin by its group and name,
+     *         ignoring the version.
+     *     </p>
+     *     <p>
+     *         This is used for registering listeners that should receive events
+     *         for all versions of a plugin.
+     *     </p>
+     * </div>
+     *
+     * @param group the group of the plugin
+     * @param name  the name of the plugin
+     *
+     * @since 1.0.0
+     */
     private record PluginIdentifier(String group,
                                     String name) {
+        /**
+         * <div>
+         *     <p>
+         *         Creates a {@code PluginIdentifier} from a {@link PluginId}.
+         *     </p>
+         * </div>
+         *
+         * @param pluginId the plugin identifier to extract the identity from
+         * @return a new {@code PluginIdentifier}
+         *
+         * @since 1.0.0
+         */
         static PluginIdentifier pluginIdentifier(final @NonNull PluginId pluginId) {
             return new PluginIdentifier(pluginId.getGroup(), pluginId.getName());
         }
     }
 
+    /**
+     * <div>
+     *     <p>
+     *         Discovers and validates the metadata within a plugin JAR.
+     *     </p>
+     * </div>
+     *
+     * @param jarSupplier a supplier providing an {@link InputStream} to the JAR
+     * @return the extracted {@link PluginMetaData}
+     * @throws IOException if the metadata cannot be found or is invalid
+     *
+     * @since 1.0.0
+     */
     private PluginMetaData discoverMetaData(final Supplier<InputStream> jarSupplier) throws IOException {
         try (final var is = jarSupplier.get();
              final var jis = new JarInputStream(is)) {

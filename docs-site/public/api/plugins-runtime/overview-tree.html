@@ -52,6 +52,9 @@ loadScripts(document, 'script');</script>
 <span class="package-hierarchy-label">Packagehierarchien:</span>
 <ul class="horizontal contents-list">
 <li><a href="foomp.plugins.runtime/org/quurz/plugins/package-tree.html">org.quurz.plugins</a>, </li>
+<li><a href="foomp.plugins.runtime/org/quurz/plugins/data/package-tree.html">org.quurz.plugins.data</a>, </li>
+<li><a href="foomp.plugins.runtime/org/quurz/plugins/events/package-tree.html">org.quurz.plugins.events</a>, </li>
+<li><a href="foomp.plugins.runtime/org/quurz/plugins/internal/package-tree.html">org.quurz.plugins.internal</a>, </li>
 <li><a href="foomp.plugins.runtime/org/quurz/plugins/localisation/package-tree.html">org.quurz.plugins.localisation</a></li>
 </ul>
 <section class="hierarchy">
@@ -59,12 +62,46 @@ loadScripts(document, 'script');</script>
 <ul>
 <li class="circle">java.lang.<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" class="type-name-link external-link" title="Klasse oder Schnittstelle in java.lang">Object</a>
 <ul>
-<li class="circle">org.quurz.plugins.<a href="foomp.plugins.runtime/org/quurz/plugins/DefaultRepository.html" class="type-name-link" title="Klasse in org.quurz.plugins">DefaultRepository</a> (implements org.quurz.plugins.<a href="foomp.plugins.runtime/org/quurz/plugins/Repository.html" title="Schnittstelle in org.quurz.plugins">Repository</a>)</li>
-<li class="circle">org.quurz.plugins.<a href="foomp.plugins.runtime/org/quurz/plugins/PluginFactory.LockedDelegator.html" class="type-name-link" title="Klasse in org.quurz.plugins">PluginFactory.LockedDelegator</a></li>
-<li class="circle">org.quurz.plugins.<a href="foomp.plugins.runtime/org/quurz/plugins/PluginHandle.html" class="type-name-link" title="Klasse in org.quurz.plugins">PluginHandle</a></li>
-<li class="circle">org.quurz.plugins.<a href="foomp.plugins.runtime/org/quurz/plugins/PluginId.html" class="type-name-link" title="Klasse in org.quurz.plugins">PluginId</a> (implements java.io.<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/Serializable.html" title="Klasse oder Schnittstelle in java.io" class="external-link">Serializable</a>)</li>
+<li class="circle">org.quurz.plugins.events.<a href="foomp.plugins.runtime/org/quurz/plugins/events/AbstractPluginChangeListener.html" class="type-name-link" title="Klasse in org.quurz.plugins.events">AbstractPluginChangeListener</a> (implements org.quurz.plugins.events.<a href="foomp.plugins.runtime/org/quurz/plugins/events/PluginChangeEventListener.html" title="Schnittstelle in org.quurz.plugins.events">PluginChangeEventListener</a>)</li>
+<li class="circle">java.lang.<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/ClassLoader.html" class="type-name-link external-link" title="Klasse oder Schnittstelle in java.lang">ClassLoader</a>
+<ul>
+<li class="circle">org.quurz.plugins.internal.<a href="foomp.plugins.runtime/org/quurz/plugins/internal/StreamClassLoader.html" class="type-name-link" title="Klasse in org.quurz.plugins.internal">StreamClassLoader</a></li>
+</ul>
+</li>
+<li class="circle">org.quurz.plugins.<a href="foomp.plugins.runtime/org/quurz/plugins/FileRepository.html" class="type-name-link" title="Klasse in org.quurz.plugins">FileRepository</a> (implements org.quurz.plugins.<a href="foomp.plugins.runtime/org/quurz/plugins/PluginRepository.html" title="Schnittstelle in org.quurz.plugins">PluginRepository</a>)</li>
+<li class="circle">org.quurz.plugins.events.<a href="foomp.plugins.runtime/org/quurz/plugins/events/PluginChangeEvent.html" class="type-name-link" title="Klasse in org.quurz.plugins.events">PluginChangeEvent</a>
+<ul>
+<li class="circle">org.quurz.plugins.events.<a href="foomp.plugins.runtime/org/quurz/plugins/events/PluginChangeEvent.PluginChangeAnnouncementEvent.html" class="type-name-link" title="Klasse in org.quurz.plugins.events">PluginChangeEvent.PluginChangeAnnouncementEvent</a></li>
+<li class="circle">org.quurz.plugins.events.<a href="foomp.plugins.runtime/org/quurz/plugins/events/PluginChangeEvent.PluginInstallEvent.html" class="type-name-link" title="Klasse in org.quurz.plugins.events">PluginChangeEvent.PluginInstallEvent</a></li>
+<li class="circle">org.quurz.plugins.events.<a href="foomp.plugins.runtime/org/quurz/plugins/events/PluginChangeEvent.PluginUninstallEvent.html" class="type-name-link" title="Klasse in org.quurz.plugins.events">PluginChangeEvent.PluginUninstallEvent</a></li>
+<li class="circle">org.quurz.plugins.events.<a href="foomp.plugins.runtime/org/quurz/plugins/events/PluginChangeEvent.PluginUpdateEvent.html" class="type-name-link" title="Klasse in org.quurz.plugins.events">PluginChangeEvent.PluginUpdateEvent</a></li>
+</ul>
+</li>
+<li class="circle">org.quurz.plugins.internal.<a href="foomp.plugins.runtime/org/quurz/plugins/internal/PluginFactory.LockedDelegator.html" class="type-name-link" title="Klasse in org.quurz.plugins.internal">PluginFactory.LockedDelegator</a></li>
+<li class="circle">org.quurz.plugins.internal.<a href="foomp.plugins.runtime/org/quurz/plugins/internal/PluginHandle.html" class="type-name-link" title="Klasse in org.quurz.plugins.internal">PluginHandle</a>&lt;A&gt;</li>
+<li class="circle">org.quurz.plugins.data.<a href="foomp.plugins.runtime/org/quurz/plugins/data/PluginId.html" class="type-name-link" title="Klasse in org.quurz.plugins.data">PluginId</a> (implements org.quurz.foomp.base.types.Eq&lt;SELF&gt;, java.io.<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/Serializable.html" title="Klasse oder Schnittstelle in java.io" class="external-link">Serializable</a>)</li>
+<li class="circle">org.quurz.plugins.<a href="foomp.plugins.runtime/org/quurz/plugins/PluginManager.html" class="type-name-link" title="Klasse in org.quurz.plugins">PluginManager</a></li>
+<li class="circle">org.quurz.plugins.data.<a href="foomp.plugins.runtime/org/quurz/plugins/data/PluginMetaData.html" class="type-name-link" title="Klasse in org.quurz.plugins.data">PluginMetaData</a></li>
+<li class="circle">org.quurz.plugins.data.<a href="foomp.plugins.runtime/org/quurz/plugins/data/PluginMetaDataValidator.html" class="type-name-link" title="Klasse in org.quurz.plugins.data">PluginMetaDataValidator</a></li>
 <li class="circle">org.quurz.plugins.localisation.<a href="foomp.plugins.runtime/org/quurz/plugins/localisation/PluginsMessages.html" class="type-name-link" title="Klasse in org.quurz.plugins.localisation">PluginsMessages</a></li>
-<li class="circle">org.quurz.plugins.<a href="foomp.plugins.runtime/org/quurz/plugins/Proxy.html" class="type-name-link" title="Klasse in org.quurz.plugins">Proxy</a>&lt;A&gt;</li>
+<li class="circle">org.quurz.plugins.internal.<a href="foomp.plugins.runtime/org/quurz/plugins/internal/Proxy.html" class="type-name-link" title="Klasse in org.quurz.plugins.internal">Proxy</a>&lt;A&gt;</li>
+<li class="circle">java.lang.<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Throwable.html" class="type-name-link external-link" title="Klasse oder Schnittstelle in java.lang">Throwable</a> (implements java.io.<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/Serializable.html" title="Klasse oder Schnittstelle in java.io" class="external-link">Serializable</a>)
+<ul>
+<li class="circle">java.lang.<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Exception.html" class="type-name-link external-link" title="Klasse oder Schnittstelle in java.lang">Exception</a>
+<ul>
+<li class="circle">java.lang.<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/RuntimeException.html" class="type-name-link external-link" title="Klasse oder Schnittstelle in java.lang">RuntimeException</a>
+<ul>
+<li class="circle">org.quurz.plugins.<a href="foomp.plugins.runtime/org/quurz/plugins/PluginsException.html" class="type-name-link" title="Klasse in org.quurz.plugins">PluginsException</a>
+<ul>
+<li class="circle">org.quurz.plugins.<a href="foomp.plugins.runtime/org/quurz/plugins/PluginRepositoryException.html" class="type-name-link" title="Klasse in org.quurz.plugins">PluginRepositoryException</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="circle">org.quurz.plugins.<a href="foomp.plugins.runtime/org/quurz/plugins/TypedValue.html" class="type-name-link" title="Klasse in org.quurz.plugins">TypedValue</a>&lt;A&gt;</li>
 </ul>
 </li>
@@ -73,8 +110,13 @@ loadScripts(document, 'script');</script>
 <section class="hierarchy">
 <h2 title="Schnittstellenhierarchie">Schnittstellenhierarchie</h2>
 <ul>
-<li class="circle">org.quurz.plugins.<a href="foomp.plugins.runtime/org/quurz/plugins/PluginFactory.html" class="type-name-link" title="Schnittstelle in org.quurz.plugins">PluginFactory</a>&lt;A&gt;</li>
-<li class="circle">org.quurz.plugins.<a href="foomp.plugins.runtime/org/quurz/plugins/Repository.html" class="type-name-link" title="Schnittstelle in org.quurz.plugins">Repository</a></li>
+<li class="circle">org.quurz.plugins.events.<a href="foomp.plugins.runtime/org/quurz/plugins/events/PluginChangeEventListener.html" class="type-name-link" title="Schnittstelle in org.quurz.plugins.events">PluginChangeEventListener</a></li>
+<li class="circle">org.quurz.plugins.<a href="foomp.plugins.runtime/org/quurz/plugins/PluginConstructor.html" class="type-name-link" title="Schnittstelle in org.quurz.plugins">PluginConstructor</a>&lt;A&gt;
+<ul>
+<li class="circle">org.quurz.plugins.internal.<a href="foomp.plugins.runtime/org/quurz/plugins/internal/PluginFactory.html" class="type-name-link" title="Schnittstelle in org.quurz.plugins.internal">PluginFactory</a>&lt;A&gt;</li>
+</ul>
+</li>
+<li class="circle">org.quurz.plugins.<a href="foomp.plugins.runtime/org/quurz/plugins/PluginRepository.html" class="type-name-link" title="Schnittstelle in org.quurz.plugins">PluginRepository</a></li>
 </ul>
 </section>
 </main>

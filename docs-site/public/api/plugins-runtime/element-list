@@ -1,3 +1,6 @@
 module:foomp.plugins.runtime
 org.quurz.plugins
+org.quurz.plugins.data
+org.quurz.plugins.events
+org.quurz.plugins.internal
 org.quurz.plugins.localisation

@@ -55,6 +55,20 @@ loadScripts(document, 'script');</script>
 <ol class="toc-list" tabindex="-1">
 <li><a href="#" tabindex="0">Beschreibung</a></li>
 <li><a href="#method-summary" tabindex="0">Methodenübersicht</a></li>
+<li><a href="#method-detail" tabindex="0">Methodendetails</a>
+<ol class="toc-list">
+<li><a href="#pluginManagerAlreadyInitialised()" tabindex="0">pluginManagerAlreadyInitialised()</a></li>
+<li><a href="#pluginManagerNotInitialised()" tabindex="0">pluginManagerNotInitialised()</a></li>
+<li><a href="#unableToCreateBaseDirectory(java.nio.file.Path)" tabindex="0">unableToCreateBaseDirectory(Path)</a></li>
+<li><a href="#unableToCreatePluginDirectory(java.nio.file.Path)" tabindex="0">unableToCreatePluginDirectory(Path)</a></li>
+<li><a href="#unableToStorePlugin(org.quurz.plugins.data.PluginId)" tabindex="0">unableToStorePlugin(PluginId)</a></li>
+<li><a href="#unableToFindPlugin(org.quurz.plugins.data.PluginId)" tabindex="0">unableToFindPlugin(PluginId)</a></li>
+<li><a href="#unableToRetrievePlugin(org.quurz.plugins.data.PluginId)" tabindex="0">unableToRetrievePlugin(PluginId)</a></li>
+<li><a href="#unableToRemovePlugin(org.quurz.plugins.data.PluginId)" tabindex="0">unableToRemovePlugin(PluginId)</a></li>
+<li><a href="#unableToCreateClassLoader()" tabindex="0">unableToCreateClassLoader()</a></li>
+<li><a href="#unableToCreatePlugin()" tabindex="0">unableToCreatePlugin()</a></li>
+</ol>
+</li>
 </ol>
 <button class="hide-sidebar"><span>Randleiste ausblenden&nbsp;</span><img src="../../../../../resource-files/left.svg" alt="Randleiste ausblenden"></button><button class="show-sidebar"><img src="../../../../../resource-files/right.svg" alt="Randleiste einblenden"><span>&nbsp;Randleiste einblenden</span></button></nav>
 <main role="main">
@@ -71,6 +85,19 @@ loadScripts(document, 'script');</script>
 <div class="horizontal-scroll">
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">PluginsMessages</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="Klasse oder Schnittstelle in java.lang" class="external-link">Object</a></span></div>
+<div class="block"><div>
+    <p>
+        Provides localized messages for the plugin system.
+    </p>
+    <p>
+        This class uses a <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/ResourceBundle.html" title="Klasse oder Schnittstelle in java.util" class="external-link"><code>ResourceBundle</code></a> to retrieve messages in the
+        current locale.
+    </p>
+</div></div>
+<dl class="notes">
+<dt>Seit:</dt>
+<dd>1.0.0</dd>
+</dl>
 </div>
 </section>
 <section class="summary">
@@ -79,9 +106,252 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="method-summary" id="method-summary">
 <h2>Methodenübersicht</h2>
+<div id="method-summary-table">
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">Alle Methoden</button><button id="method-summary-table-tab1" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab1', 3)" class="table-tab">Statische Methoden</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Konkrete Methoden</button></div>
+<div id="method-summary-table.tabpanel" role="tabpanel" aria-labelledby="method-summary-table-tab0">
+<div class="summary-table three-column-summary">
+<div class="table-header col-first">Modifikator und Typ</div>
+<div class="table-header col-second">Methode</div>
+<div class="table-header col-last">Beschreibung</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="Klasse oder Schnittstelle in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#pluginManagerAlreadyInitialised()" class="member-name-link">pluginManagerAlreadyInitialised</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="Klasse oder Schnittstelle in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#pluginManagerNotInitialised()" class="member-name-link">pluginManagerNotInitialised</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="Klasse oder Schnittstelle in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#unableToCreateBaseDirectory(java.nio.file.Path)" class="member-name-link">unableToCreateBaseDirectory</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/file/Path.html" title="Klasse oder Schnittstelle in java.nio.file" class="external-link">Path</a>&nbsp;directory)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="Klasse oder Schnittstelle in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#unableToCreateClassLoader()" class="member-name-link">unableToCreateClassLoader</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="Klasse oder Schnittstelle in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#unableToCreatePlugin()" class="member-name-link">unableToCreatePlugin</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="Klasse oder Schnittstelle in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#unableToCreatePluginDirectory(java.nio.file.Path)" class="member-name-link">unableToCreatePluginDirectory</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/file/Path.html" title="Klasse oder Schnittstelle in java.nio.file" class="external-link">Path</a>&nbsp;directory)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="Klasse oder Schnittstelle in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#unableToFindPlugin(org.quurz.plugins.data.PluginId)" class="member-name-link">unableToFindPlugin</a><wbr>(@NonNull <a href="../data/PluginId.html" title="Klasse in org.quurz.plugins.data">PluginId</a>&nbsp;pluginId)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="Klasse oder Schnittstelle in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#unableToRemovePlugin(org.quurz.plugins.data.PluginId)" class="member-name-link">unableToRemovePlugin</a><wbr>(@NonNull <a href="../data/PluginId.html" title="Klasse in org.quurz.plugins.data">PluginId</a>&nbsp;pluginId)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="Klasse oder Schnittstelle in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#unableToRetrievePlugin(org.quurz.plugins.data.PluginId)" class="member-name-link">unableToRetrievePlugin</a><wbr>(@NonNull <a href="../data/PluginId.html" title="Klasse in org.quurz.plugins.data">PluginId</a>&nbsp;pluginId)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="Klasse oder Schnittstelle in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#unableToStorePlugin(org.quurz.plugins.data.PluginId)" class="member-name-link">unableToStorePlugin</a><wbr>(@NonNull <a href="../data/PluginId.html" title="Klasse in org.quurz.plugins.data">PluginId</a>&nbsp;pluginId)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"></div>
+</div>
+</div>
+</div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-java.lang.Object">Von Klasse geerbte Methoden&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#method-summary" title="Klasse oder Schnittstelle in java.lang" class="external-link">Object</a></h3>
 <code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#clone()" title="Klasse oder Schnittstelle in java.lang" class="external-link">clone</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="Klasse oder Schnittstelle in java.lang" class="external-link">equals</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#finalize()" title="Klasse oder Schnittstelle in java.lang" class="external-link">finalize</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#getClass()" title="Klasse oder Schnittstelle in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#hashCode()" title="Klasse oder Schnittstelle in java.lang" class="external-link">hashCode</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#notify()" title="Klasse oder Schnittstelle in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#notifyAll()" title="Klasse oder Schnittstelle in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#toString()" title="Klasse oder Schnittstelle in java.lang" class="external-link">toString</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#wait()" title="Klasse oder Schnittstelle in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#wait(long)" title="Klasse oder Schnittstelle in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#wait(long,int)" title="Klasse oder Schnittstelle in java.lang" class="external-link">wait</a></code></div>
+</section>
+</li>
+</ul>
+</section>
+<section class="details">
+<ul class="details-list">
+<!-- ============ METHOD DETAIL ========== -->
+<li>
+<section class="method-details" id="method-detail">
+<h2>Methodendetails</h2>
+<ul class="member-list">
+<li>
+<section class="detail" id="pluginManagerAlreadyInitialised()">
+<h3>pluginManagerAlreadyInitialised</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="Klasse oder Schnittstelle in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">pluginManagerAlreadyInitialised</span>()</div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="pluginManagerNotInitialised()">
+<h3>pluginManagerNotInitialised</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="Klasse oder Schnittstelle in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">pluginManagerNotInitialised</span>()</div>
+<div class="block"><div>
+    <p>
+        Returns a message indicating that the plugin manager has not been initialised.
+    </p>
+</div></div>
+<dl class="notes">
+<dt>Gibt zurück:</dt>
+<dd>the localized error message</dd>
+<dt>Seit:</dt>
+<dd>1.0.0</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="unableToCreateBaseDirectory(java.nio.file.Path)">
+<h3>unableToCreateBaseDirectory</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="Klasse oder Schnittstelle in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">unableToCreateBaseDirectory</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/file/Path.html" title="Klasse oder Schnittstelle in java.nio.file" class="external-link">Path</a>&nbsp;directory)</span></div>
+<div class="block"><div>
+    <p>
+        Returns a message indicating that the base directory could not be created.
+    </p>
+</div></div>
+<dl class="notes">
+<dt>Parameter:</dt>
+<dd><code>directory</code> - the path of the directory that could not be created; must not be <code>null</code></dd>
+<dt>Gibt zurück:</dt>
+<dd>the localized error message</dd>
+<dt>Seit:</dt>
+<dd>1.0.0</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="unableToCreatePluginDirectory(java.nio.file.Path)">
+<h3>unableToCreatePluginDirectory</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="Klasse oder Schnittstelle in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">unableToCreatePluginDirectory</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/file/Path.html" title="Klasse oder Schnittstelle in java.nio.file" class="external-link">Path</a>&nbsp;directory)</span></div>
+<div class="block"><div>
+    <p>
+        Returns a message indicating that a plugin-specific directory could not be created.
+    </p>
+</div></div>
+<dl class="notes">
+<dt>Parameter:</dt>
+<dd><code>directory</code> - the path of the directory that could not be created; must not be <code>null</code></dd>
+<dt>Gibt zurück:</dt>
+<dd>the localized error message</dd>
+<dt>Seit:</dt>
+<dd>1.0.0</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="unableToStorePlugin(org.quurz.plugins.data.PluginId)">
+<h3>unableToStorePlugin</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="Klasse oder Schnittstelle in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">unableToStorePlugin</span><wbr><span class="parameters">(@NonNull <a href="../data/PluginId.html" title="Klasse in org.quurz.plugins.data">PluginId</a>&nbsp;pluginId)</span></div>
+<div class="block"><div>
+    <p>
+        Returns a message indicating that a plugin could not be stored.
+    </p>
+</div></div>
+<dl class="notes">
+<dt>Parameter:</dt>
+<dd><code>pluginId</code> - the unique identifier of the plugin; must not be <code>null</code></dd>
+<dt>Gibt zurück:</dt>
+<dd>the localized error message</dd>
+<dt>Seit:</dt>
+<dd>1.0.0</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="unableToFindPlugin(org.quurz.plugins.data.PluginId)">
+<h3>unableToFindPlugin</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="Klasse oder Schnittstelle in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">unableToFindPlugin</span><wbr><span class="parameters">(@NonNull <a href="../data/PluginId.html" title="Klasse in org.quurz.plugins.data">PluginId</a>&nbsp;pluginId)</span></div>
+<div class="block"><div>
+    <p>
+        Returns a message indicating that a plugin could not be found.
+    </p>
+</div></div>
+<dl class="notes">
+<dt>Parameter:</dt>
+<dd><code>pluginId</code> - the unique identifier of the plugin; must not be <code>null</code></dd>
+<dt>Gibt zurück:</dt>
+<dd>the localized error message</dd>
+<dt>Seit:</dt>
+<dd>1.0.0</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="unableToRetrievePlugin(org.quurz.plugins.data.PluginId)">
+<h3>unableToRetrievePlugin</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="Klasse oder Schnittstelle in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">unableToRetrievePlugin</span><wbr><span class="parameters">(@NonNull <a href="../data/PluginId.html" title="Klasse in org.quurz.plugins.data">PluginId</a>&nbsp;pluginId)</span></div>
+<div class="block"><div>
+    <p>
+        Returns a message indicating that a plugin could not be retrieved from the repository.
+    </p>
+</div></div>
+<dl class="notes">
+<dt>Parameter:</dt>
+<dd><code>pluginId</code> - the unique identifier of the plugin; must not be <code>null</code></dd>
+<dt>Gibt zurück:</dt>
+<dd>the localized error message</dd>
+<dt>Seit:</dt>
+<dd>1.0.0</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="unableToRemovePlugin(org.quurz.plugins.data.PluginId)">
+<h3>unableToRemovePlugin</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="Klasse oder Schnittstelle in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">unableToRemovePlugin</span><wbr><span class="parameters">(@NonNull <a href="../data/PluginId.html" title="Klasse in org.quurz.plugins.data">PluginId</a>&nbsp;pluginId)</span></div>
+<div class="block"><div>
+    <p>
+        Returns a message indicating that a plugin could not be removed from the repository.
+    </p>
+</div></div>
+<dl class="notes">
+<dt>Parameter:</dt>
+<dd><code>pluginId</code> - the unique identifier of the plugin; must not be <code>null</code></dd>
+<dt>Gibt zurück:</dt>
+<dd>the localized error message</dd>
+<dt>Seit:</dt>
+<dd>1.0.0</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="unableToCreateClassLoader()">
+<h3>unableToCreateClassLoader</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="Klasse oder Schnittstelle in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">unableToCreateClassLoader</span>()</div>
+<div class="block"><div>
+    <p>
+        Returns a message indicating that a class loader for the plugin could not be created.
+    </p>
+</div></div>
+<dl class="notes">
+<dt>Gibt zurück:</dt>
+<dd>the localized error message</dd>
+<dt>Seit:</dt>
+<dd>1.0.0</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="unableToCreatePlugin()">
+<h3>unableToCreatePlugin</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="Klasse oder Schnittstelle in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">unableToCreatePlugin</span>()</div>
+<div class="block"><div>
+    <p>
+        Returns a message indicating that a plugin instance could not be created.
+    </p>
+</div></div>
+<dl class="notes">
+<dt>Gibt zurück:</dt>
+<dd>the localized error message</dd>
+<dt>Seit:</dt>
+<dd>1.0.0</dd>
+</dl>
+</div>
+</section>
+</li>
+</ul>
 </section>
 </li>
 </ul>

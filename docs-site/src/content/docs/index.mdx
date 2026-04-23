@@ -1,40 +1,36 @@
 ---
-title: Welcome to Starlight
-description: Get started building your docs site with Starlight.
-template: splash # Remove or comment out this line to display the site sidebar on this page.
+title: Plugins Runtime
+description: A powerful and flexible plugin system for Java applications.
+template: splash
 hero:
-  tagline: Congrats on setting up a new Starlight project!
+  tagline: Dynamically load, manage, and execute plugins with ease.
   image:
     file: ../../assets/houston.webp
   actions:
-    - text: Example Guide
-      link: /guides/example/
+    - text: Get Started
+      link: /guides/introduction/
       icon: right-arrow
-    - text: Read the Starlight docs
-      link: https://starlight.astro.build
+    - text: View on GitHub
+      link: https://github.com/Quurz/Plugins
       icon: external
       variant: minimal
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
-## Next steps
+## Key Features
 
 <CardGrid stagger>
-	<Card title="Update content" icon="pencil">
-		Edit `src/content/docs/index.mdx` to see this page change.
+	<Card title="Isolated Class Loading" icon="seti:java">
+		Plugins are loaded in complete isolation using a custom `StreamClassLoader`, preventing dependency conflicts.
 	</Card>
-	<Card title="Change page layout" icon="document">
-		Delete `template: splash` in `src/content/docs/index.mdx` to display a
-		sidebar on this page.
+	<Card title="Type-Safe Contracts" icon="approve-check-circle">
+		Define clear interfaces (contracts) that plugins must implement for seamless integration.
 	</Card>
-	<Card title="Add new content" icon="add-document">
-		Add Markdown or MDX files to `src/content/docs` to create new pages.
+	<Card title="JSON Metadata" icon="document">
+		Simple `plugin.json` metadata for discovery, validation, and identification.
 	</Card>
-	<Card title="Configure your site" icon="setting">
-		Edit your `sidebar` and other config in `astro.config.mjs`.
-	</Card>
-	<Card title="Read the docs" icon="open-book">
-		Learn more in [the Starlight Docs](https://starlight.astro.build/).
+	<Card title="Lifecycle Management" icon="rocket">
+		Easily manage the lifecycle of your plugins with the `PluginManager`.
 	</Card>
 </CardGrid>
